@@ -1,0 +1,79 @@
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, Field
+import os
+import json
+from openai import OpenAI
+
+app = FastAPI(
+    title="Relational & Behavioral Intelligence API",
+    version="1.0.0",
+    description="Backend API for analyzing intent and relationship dynamics."
+)
+
+# Initialize the AI client using an environment variable.
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+# 1. Input data models (Pydantic)
+class AnalysisRequest(BaseModel):
+    user_input: str = Field(..., description="A message or situation description provided by the user.")
+    relationship_context: str = Field(..., description="Relationship context, e.g. 'romantic', 'coworker', or 'family'.")
+
+# 2. Main analysis endpoint
+@app.post("/api/v1/analyze", summary="Behavioral and intent analysis")
+async def analyze_behavior(request: AnalysisRequest):
+    system_prompt = """
+    You are an analytical assistant specializing in behavioral psychology and relationship dynamics.
+    Objectively analyze behaviors, text messages, and situations provided by the user without judgment.
+    
+    Consider the Big Five, Reiss Motivation Profile, and attachment theory as interpretive frameworks.
+    Do not make clinical diagnoses. Focus on possible intentions, defensive mechanisms, motivations, and emotional reactivity.
+    Separate observable facts from interpretations, express uncertainty, and do not infer a diagnosis from a message.
+    
+    Return valid JSON only, using this structure:
+    {
+      "behavioral_summary": "A brief, objective summary of the situation.",
+      "perceived_intent": {
+        "primary_motivation": "A possible primary motivation, if supported by the evidence.",
+        "confidence_score": 0.0
+      },
+      "psychometric_indicators": {
+        "attachment_style_signal": "A tentative signal or insufficient information.",
+        "communication_style": "An observed communication style or insufficient information.",
+        "emotional_state": "A possible emotional state, clearly marked as tentative."
+      },
+      "risk_factors": [
+        "A specific concern supported by the described behavior."
+      ],
+      "recommended_responses": [
+        {
+          "strategy": "A suggested approach, such as de-escalation or setting a boundary.",
+          "example_text": "A possible reply.",
+          "expected_outcome": "A possible purpose, not a guaranteed result."
+        }
+      ]
+    }
+    """
+
+    try:
+        # Request a JSON-formatted response from the AI model.
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": f"Relationship context: {request.relationship_context}\n\nText or situation to analyze: {request.user_input}"}
+            ],
+            response_format={"type": "json_object"},
+            temperature=0.3  # Lower temperature for more consistent analytical responses.
+        )
+        
+        # Parse the model response.
+        analysis_result = json.loads(response.choices[0].message.content)
+        return {
+            "status": "success",
+            "data": analysis_result
+        }
+
+    except Exception as e:
+      raise HTTPException(status_code=500, detail=f"AI analysis failed: {str(e)}")
+
+    # Run locally with: uvicorn main:app --reload

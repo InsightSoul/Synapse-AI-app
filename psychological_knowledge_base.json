@@ -1,0 +1,61 @@
+{
+  "version": "2.4",
+  "description": "Zaawansowana lokalna baza wiedzy psychometrycznej i behawioralnej Synapse AI",
+  "frameworks": {
+    "big_five": {
+      "name": "Wielka Piątka (OCEAN)",
+      "traits": {
+        "openness": "Otwartość na doświadczenie (ciekawość poznawcza, wyobraźnia, nietuzinkowość)",
+        "conscientiousness": "Sumienność (organizacja, samodyscyplina, dążenie do celu)",
+        "extraversion": "Ekstrawersja (energia, poszukiwanie stymulacji, asertywność)",
+        "agreeableness": "Ugodowość (empatia, współpraca, zaufanie, altruizm)",
+        "neuroticism": "Neurotyczność (reaktywność emocjonalna, podatność na stres, lęk)"
+      }
+    },
+    "reiss_motivation": {
+      "name": "Reiss Motivation Profile",
+      "core_motivators": [
+        "Power (Potrzeba władzy i wywierania wpływu)",
+        "Independence (Niezależność i autonomia)",
+        "Curiosity (Ciekawość i poszukiwanie wiedzy)",
+        "Acceptance (Potrzeba akceptacji i unikanie krytyki)",
+        "Status (Potrzeba pozycji społecznej)",
+        "Tranquility (Potrzeba bezpieczeństwa i spokoju)",
+        "Order (Porządek i struktura)"
+      ]
+    },
+    "attachment_theory": {
+      "name": "Teoria Przywiązania (Attachment Theory)",
+      "styles": {
+        "secure": "Bezpieczny (komfort z bliskością i autonomią, konstruktywna komunikacja)",
+        "anxious": "Lękowo-zaangażowany (nadmierna czujność, lęk przed porzuceniem, potrzeba ciągłego potwierdzania)",
+        "avoidant_dismissive": "Unikająco-odrzucający (tłumienie potrzeb bliskości, przesadna samowystarczalność, ucieczka w zadania)",
+        "fearful_avoidant": "Zdezorganizowany (lęk przed bliskością połączony z lękiem przed odrzuceniem)"
+      }
+    },
+    "jung_and_adler": {
+      "name": "Perspektywa Junga i Adlera",
+      "concepts": [
+        "Cień (Jung): nieświadome aspekty osobowości, które jednostka wypiera",
+        "Indywidualizacja (Jung): proces scalania osobowości",
+        "Celowość zachowania (Adler): każde zachowanie ma swój cel społeczny (np. kompensacja poczucia niższości, dążenie do uznania)"
+      ]
+    },
+    "mbti_and_enneagram": {
+      "name": "MBTI & Enneagram Framework",
+      "description": "Korelacja funkcji poznawczych (Ti, Te, Fi, Fe, Ne, Ni, Se, Si) oraz 9 typów Enneagramu wraz z poziomami integracji i dezintegracji."
+    },
+    "dark_triad": {
+      "name": "Skala Mrocznej Triady (Dark Triad Scale)",
+      "traits": [
+        "Narcissism (Narcyzm - grandiozność, poczucie wyjątkowości, potrzeba podziwu)",
+        "Machiavellianism (Makiawelizm - instrumentalne traktowanie ludzi, cynizm, wyrachowanie)",
+        "Psychopathy (Psychopatia - niski poziom empatii, impulsywność, brak wyrzutów sumienia)"
+      ]
+    },
+    "dsm_5_tr_framework": {
+      "name": "Rama diagnostyczna DSM-5-TR",
+      "rule": "Traktowana wyłącznie jako profesjonalny słownik pojęć klinicznych i kryteriów opisowych. Zakaz stawiania diagnoz jednostkom na podstawie pojedynczych wiadomości lub opisów relacyjnych."
+    }
+  }
+}

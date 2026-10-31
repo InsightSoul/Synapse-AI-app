@@ -1,0 +1,14 @@
+[project]
+name = "synapse-ai-api"
+version = "0.1.0"
+description = "Authenticated behavioral analysis and consent-based audio API"
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi",
+  "uvicorn[standard]",
+  "openai",
+  "pydantic",
+  "sqlalchemy",
+  "jinja2",
+  "python-dotenv",
+]
